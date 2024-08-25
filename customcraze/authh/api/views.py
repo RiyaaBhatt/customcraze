@@ -34,6 +34,8 @@ class MyTokenPairView(TokenObtainPairView):
 def signup_view(request):
     username = request.data.get('username')
     password = request.data.get('password')
+    firstname=request.data.get("firstname")
+    email=request.data.get("email")
 
     if not username or not password:
         return Response({'error': 'Username and password are required.'}, status=status.HTTP_400_BAD_REQUEST)
@@ -41,5 +43,12 @@ def signup_view(request):
     if User.objects.filter(username=username).exists():
         return Response({'error': 'Username already exists.'}, status=status.HTTP_400_BAD_REQUEST)
 
-    user = User.objects.create_user(username=username, password=password)
+    user = User.objects.create_user(username=username, password=password,email=email)
     return Response({'message': 'User created successfully.'}, status=status.HTTP_201_CREATED)
+from rest_framework import generics
+from django.contrib.auth.models import User  # Importing the built-in User model
+from .serializers import UserSerializer
+
+class UserListView(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer

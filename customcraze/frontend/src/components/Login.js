@@ -16,7 +16,11 @@ const Login = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/dashboard'); // Redirect to dashboard after successful login
+      if(credentials.username=="admin"){
+        navigate("/admindashboard")
+      }
+      else{navigate('/dashboard');}
+       // Redirect to dashboard after successful login
     }
     // Handle errors by showing a message or taking action
     if (error) {

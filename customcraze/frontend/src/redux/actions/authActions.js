@@ -27,14 +27,14 @@ export const login = (username, password) => async dispatch => {
 };
 
 // Signup action
-export const signup = (username, password) => async (dispatch) => {
+export const signup = (username, password,first_name,email) => async (dispatch) => {
   try {
     // Get CSRF token from the HTML
     const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
     // Make a POST request to the signup endpoint
     await axios.post(`${API_BASE_URL}/signup/`, 
-      { username, password },
+      { username, password,firstname,email },
       {
         headers: {
           'X-CSRFToken': csrfToken // Include CSRF token in the request headers

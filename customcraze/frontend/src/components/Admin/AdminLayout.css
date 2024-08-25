@@ -1,0 +1,12 @@
+/* AdminLayout.css */
+
+.admin-layout {
+    display: flex;
+  }
+  
+  .admin-content {
+    margin-left: 250px; /* Adjust based on sidebar width */
+    padding: 20px;
+    flex: 1;
+  }
+  
