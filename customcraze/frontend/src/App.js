@@ -10,8 +10,9 @@ import AdminDash from "./components/Admin/AdminSidebar";
 import User from "./components/Admin/User";
 import AdminSidebar from "./components/Admin/AdminSidebar";
 import AdminLayout from "./components/Admin/AdminLayout";
-import Products from './components/admin/Products'
+import Products from './components/Admin/ProductC'
 import Reports from './components/admin/Reports'
+import DashboardC from "./components/Admin/DashboardC";
 const App = () => {
   return (
     <Router>
@@ -38,7 +39,7 @@ const App = () => {
             }
           >
             <Route index element={<AdminSidebar />} />
-            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="dashboard" element={<DashboardC />} />
             <Route path="users" element={<User/>} />
             <Route path="products" element={<Products />} />
             <Route path="reports" element={<Reports />} />
