@@ -18,7 +18,11 @@ from django.contrib import admin
 from django.urls import path,include
 
 urlpatterns = [
+     path('api/', include('product.urls')),
+
     path('admin/', admin.site.urls),
     path('api/',include("authh.api.urls")),
-    path('',include("frontend.urls"))
+    path('',include("frontend.urls")),
+    #   note don't include any url after this it's not displaying
+       
 ]
