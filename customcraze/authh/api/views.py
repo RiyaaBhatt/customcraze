@@ -34,7 +34,7 @@ class MyTokenPairView(TokenObtainPairView):
 def signup_view(request):
     username = request.data.get('username')
     password = request.data.get('password')
-    firstname=request.data.get("firstname")
+    
     email=request.data.get("email")
 
     if not username or not password:

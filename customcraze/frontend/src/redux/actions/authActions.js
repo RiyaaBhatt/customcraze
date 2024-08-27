@@ -1,4 +1,3 @@
-// src/redux/actions/authActions.js
 import axios from 'axios';
 import { LOGIN_SUCCESS, LOGIN_FAIL, SIGNUP_SUCCESS, SIGNUP_FAIL, LOGOUT } from './types';
 
@@ -27,14 +26,14 @@ export const login = (username, password) => async dispatch => {
 };
 
 // Signup action
-export const signup = (username, password,first_name,email) => async (dispatch) => {
+export const signup = (username, password,email) => async (dispatch) => {
   try {
     // Get CSRF token from the HTML
     const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
     // Make a POST request to the signup endpoint
     await axios.post(`${API_BASE_URL}/signup/`, 
-      { username, password,firstname,email },
+      {username, password,email},
       {
         headers: {
           'X-CSRFToken': csrfToken // Include CSRF token in the request headers
@@ -53,4 +52,4 @@ export const signup = (username, password,first_name,email) => async (dispatch) 
       payload: error.response ? error.response.data : 'An error occurred',
     });
   }
-};
+}

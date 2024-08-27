@@ -25,7 +25,7 @@ INSTALLED_APPS = [
     'frontend',  # Custom app
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
-    'corsheaders','product'
+    'corsheaders','product','designs','orders'
 ]
 import os
 
