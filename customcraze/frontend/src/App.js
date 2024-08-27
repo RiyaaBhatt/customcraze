@@ -13,6 +13,7 @@ import AdminLayout from "./components/Admin/AdminLayout";
 import Products from './components/Admin/ProductC'
 import Reports from './components/admin/Reports'
 import DashboardC from "./components/Admin/DashboardC";
+import CustomizationTemplates from "./components/Admin/CustomizationTemplates";
 const App = () => {
   return (
     <Router>
@@ -42,7 +43,7 @@ const App = () => {
             <Route path="dashboard" element={<DashboardC />} />
             <Route path="users" element={<User/>} />
             <Route path="products" element={<Products />} />
-            <Route path="reports" element={<Reports />} />
+            <Route path="reports" element={<CustomizationTemplates />} />
             {/* <Route path="logout" element={<Logout/>}/> */}
           </Route>
         </Routes>
