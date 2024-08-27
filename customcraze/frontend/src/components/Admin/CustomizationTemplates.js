@@ -11,6 +11,7 @@ const CustomizationTemplates = () => {
         image: null
     });
     const [showModal, setShowModal] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);  // Track whether it's an edit or add operation
 
     useEffect(() => {
         fetchTemplates();
@@ -35,6 +36,7 @@ const CustomizationTemplates = () => {
     };
 
     const handleEdit = (template) => {
+        setIsEditing(true);
         setEditingTemplate(template);
         setNewData({
             name: template.name,
@@ -51,7 +53,7 @@ const CustomizationTemplates = () => {
         if (newData.image) {
             formData.append('image', newData.image);
         }
-    
+
         try {
             const response = await axios.put(`http://127.0.0.1:8000/api/customization-templates/${editingTemplate.id}/`, formData, {
                 headers: {
@@ -62,6 +64,7 @@ const CustomizationTemplates = () => {
             setShowModal(false);  // Close the modal
             setEditingTemplate(null);  // Reset the editing state
             setNewData({ name: '', description: '', image: null });  // Reset the form
+            setIsEditing(false);
         } catch (error) {
             console.error('Error updating template:', error);
             if (error.response) {
@@ -69,7 +72,39 @@ const CustomizationTemplates = () => {
             }
         }
     };
-    
+
+    const handleAdd = () => {
+        setIsEditing(false);
+        setNewData({ name: '', description: '', image: null,created_by:"admin" });
+        setShowModal(true);
+    };
+
+    const handleCreate = async () => {
+        const formData = new FormData();
+        formData.append('name', newData.name);
+        formData.append('description', newData.description);
+        formData.append('created_by', "admin");
+        if (newData.image) {
+            formData.append('image', newData.image);
+        }
+
+        try {
+            await axios.post('http://127.0.0.1:8000/api/customization-templates/', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            fetchTemplates();  // Refresh the list
+            setShowModal(false);  // Close the modal
+            setNewData({ name: '', description: '', image: null });  // Reset the form
+        } catch (error) {
+            console.error('Error creating template:', error);
+            if (error.response) {
+                alert(`Creation failed: ${JSON.stringify(error.response.data)}`);  // Show a user-friendly message
+            }
+        }
+    };
+
     const handleChange = (e) => {
         const { name, value, type, files } = e.target;
         if (type === 'file') {
@@ -82,6 +117,7 @@ const CustomizationTemplates = () => {
     return (
         <div className="container mt-5">
             <h2>Customization Templates</h2>
+            <Button variant="success" onClick={handleAdd} className="mb-3">Add Template</Button>
             <Table striped bordered hover>
                 <thead>
                     <tr>
@@ -89,6 +125,7 @@ const CustomizationTemplates = () => {
                         <th>Name</th>
                         <th>Description</th>
                         <th>Image</th>
+                        <th>Created By</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -105,6 +142,7 @@ const CustomizationTemplates = () => {
                                     'No Image'
                                 )}
                             </td>
+                            <td>{template.created_by}</td>
                             <td>
                                 <Button variant="primary" onClick={() => handleEdit(template)}>Edit</Button>{' '}
                                 <Button variant="danger" onClick={() => handleDelete(template.id)}>Delete</Button>
@@ -116,7 +154,7 @@ const CustomizationTemplates = () => {
 
             <Modal show={showModal} onHide={() => setShowModal(false)}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Edit Template</Modal.Title>
+                    <Modal.Title>{isEditing ? 'Edit Template' : 'Add Template'}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
@@ -152,8 +190,8 @@ const CustomizationTemplates = () => {
                     <Button variant="secondary" onClick={() => setShowModal(false)}>
                         Cancel
                     </Button>
-                    <Button variant="primary" onClick={handleUpdate}>
-                        Update
+                    <Button variant="primary" onClick={isEditing ? handleUpdate : handleCreate}>
+                        {isEditing ? 'Update' : 'Add'}
                     </Button>
                 </Modal.Footer>
             </Modal>
