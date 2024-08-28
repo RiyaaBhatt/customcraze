@@ -5,6 +5,8 @@ class Order(models.Model):
     STATUS_CHOICES = [
         ('pending', 'Pending'),
         ('completed', 'Completed'),
+        ('cancelled', 'Cancelled'),
+        
     ]
 
     item = models.ForeignKey(Item, on_delete=models.CASCADE)  # Reference to the Item model
@@ -13,6 +15,7 @@ class Order(models.Model):
     name = models.CharField(max_length=255)
     address = models.TextField()
     email = models.EmailField()
+    price=models.IntegerField()
     phone = models.CharField(max_length=15)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
     created_at = models.DateTimeField(auto_now_add=True)

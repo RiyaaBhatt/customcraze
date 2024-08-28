@@ -162,7 +162,7 @@ const ProductForm = ({ product, onClose, onSave }) => {
     }
 
     const csrfToken = getCookie('csrftoken'); // Function to get CSRF token from cookie
-    const url = product ? `http://localhost:8000/api/productapi/${product.item_id}/` : 'http://localhost:8000/api/productapi/';
+    const url = product ? `http://localhost:8000/productapi/${product.item_id}/` : 'http://localhost:8000/productapi/';
     const method = product ? 'PUT' : 'POST';
 
     try {
@@ -185,7 +185,7 @@ const ProductForm = ({ product, onClose, onSave }) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} method="POST" encType="multipart/form-data"> 
       <Form.Group controlId="formName">
         <Form.Label>Name</Form.Label>
         <Form.Control

@@ -28,7 +28,12 @@ const AdminSidebar = () => {
           </li>
           <li>
             <Link to="/admindashboard/reports" className="nav-link">
-              <FaChartBar className="sidebar-icon" /> Reports
+              <FaChartBar className="sidebar-icon" /> Templates
+            </Link>
+          </li>
+          <li>
+            <Link to="/admindashboard/Orders" className="nav-link">
+              <FaChartBar className="sidebar-icon" /> Orders
             </Link>
           </li>
           <li>

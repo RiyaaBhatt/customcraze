@@ -15,7 +15,7 @@ const Products = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/productapi/');
+      const response = await fetch('http://localhost:8000/productapi/');
       if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
       
       const contentType = response.headers.get('content-type');
@@ -52,7 +52,7 @@ const Products = () => {
     const csrfToken = getCookie('csrftoken'); // Function to get CSRF token from cookie
   
     try {
-      const response = await fetch(`http://localhost:8000/api/productapi/${id}/`, {
+      const response = await fetch(`http://localhost:8000/productapi/${id}/`, {
         method: 'DELETE',
         headers: {
           'X-CSRFToken': csrfToken,
@@ -97,7 +97,8 @@ const Products = () => {
               <td>{product.description}</td>
               <td>${product.price}</td>
               <td>
-                {product.image ? <img src={product.image_url} alt={product.name} style={{ width: '100px' }} /> : 'No image'}
+                console.log(product.image)
+                {product.image ? <img src={product.image} alt={product.name} style={{ width: '100px' }} /> : 'No image'}
               </td>
               <td>
                 <Button variant="warning" onClick={() => handleEditProduct(product)}>Edit</Button>

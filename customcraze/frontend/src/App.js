@@ -14,6 +14,8 @@ import Products from './components/Admin/ProductC'
 import Reports from './components/admin/Reports'
 import DashboardC from "./components/Admin/DashboardC";
 import CustomizationTemplates from "./components/Admin/CustomizationTemplates";
+
+import Orders from "./components/Admin/Orders";
 const App = () => {
   return (
     <Router>
@@ -44,6 +46,7 @@ const App = () => {
             <Route path="users" element={<User/>} />
             <Route path="products" element={<Products />} />
             <Route path="reports" element={<CustomizationTemplates />} />
+            <Route path="Orders" element={<Orders />} />
             {/* <Route path="logout" element={<Logout/>}/> */}
           </Route>
         </Routes>

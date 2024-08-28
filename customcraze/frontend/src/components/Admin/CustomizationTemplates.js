@@ -53,7 +53,7 @@ const CustomizationTemplates = () => {
         if (newData.image) {
             formData.append('image', newData.image);
         }
-
+    
         try {
             const response = await axios.put(`http://127.0.0.1:8000/api/customization-templates/${editingTemplate.id}/`, formData, {
                 headers: {
@@ -68,11 +68,14 @@ const CustomizationTemplates = () => {
         } catch (error) {
             console.error('Error updating template:', error);
             if (error.response) {
+                console.error('Response data:', error.response.data);
                 alert(`Update failed: ${JSON.stringify(error.response.data)}`);  // Show a user-friendly message
+            } else {
+                alert('Update failed: No response from server');
             }
         }
     };
-
+    
     const handleAdd = () => {
         setIsEditing(false);
         setNewData({ name: '', description: '', image: null,created_by:"admin" });
