@@ -3,58 +3,79 @@ import './Dashboard.css'; // Custom CSS for styling
 
 const DashboardC = () => {
   const [totalUsers, setTotalUsers] = useState(0); // State to store the total number of users
+  const [totalProducts, setTotalProducts] = useState(0); // State to store the total number of products
+  const [pendingOrders, setPendingOrders] = useState(0); // State to store the number of pending orders
+  const [totalSales, setTotalSales] = useState(0); // State to store the total sales from completed orders
   const [error, setError] = useState(null); // State to store any error message
-  const [totalProduct,setTotalProduct]=useState(0)
+
   useEffect(() => {
-    // Function to fetch the total number of users
     const fetchTotalUsers = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/users/'); // Use the full URL if needed
+        const response = await fetch('http://localhost:8000/api/users/');
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        const contentType = response.headers.get('content-type');
-        if (contentType && contentType.includes('application/json')) {
-          const data = await response.json();
-          setTotalUsers(data.length); // Assuming the API returns an array of users
-        } else {
-          throw new Error('Received non-JSON response');
-        }
+        const data = await response.json();
+        setTotalUsers(data.length);
       } catch (error) {
         console.error('Error fetching total users:', error);
         setError(error.message);
       }
     };
 
-    fetchTotalUsers(); // Call the function to fetch data
-  }, []); // Empty dependency array means this effect runs once after the initial render
+    fetchTotalUsers();
+  }, []);
 
-  
   useEffect(() => {
-    // Function to fetch the total number of users
     const fetchTotalProducts = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/productapi/'); // Use the full URL if needed
+        const response = await fetch('http://localhost:8000/productapi/');
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        const contentType = response.headers.get('content-type');
-        if (contentType && contentType.includes('application/json')) {
-          const data = await response.json();
-          setTotalProduct(data.length); // Assuming the API returns an array of users
-        } else {
-          throw new Error('Received non-JSON response');
-        }
+        const data = await response.json();
+        setTotalProducts(data.length);
       } catch (error) {
-        console.error('Error fetching total users:', error);
+        console.error('Error fetching total products:', error);
         setError(error.message);
       }
     };
 
-    fetchTotalProducts(); // Call the function to fetch data
+    fetchTotalProducts();
   }, []);
+
+  useEffect(() => {
+    const fetchPendingOrders = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/api/orders/');
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+  
+        const data = await response.json();
+        
+        // Count pending orders
+        const pendingOrdersCount = data.filter(order => order.status === 'pending').length;
+        setPendingOrders(pendingOrdersCount);
+  
+        // Calculate total sales from completed orders
+        const totalSalesAmount = data
+          .filter(order => order.status === 'completed')
+          .reduce((sum, order) => sum + parseFloat(order.price) || 0, 0);
+        setTotalSales(totalSalesAmount);
+        
+      } catch (error) {
+        console.error('Error fetching orders:', error);
+        setError(error.message);
+      }
+    };
+  
+    fetchPendingOrders();
+  }, []);
+  
+
   return (
     <div className="dashboard-container">
       <header className="dashboard-header">
@@ -67,19 +88,19 @@ const DashboardC = () => {
         </div>
         <div className="card">
           <h3>Total Products</h3>
-          {error ? <p>Error: {error}</p> : <p>{totalProduct}</p>}
+          {error ? <p>Error: {error}</p> : <p>{totalProducts}</p>}
         </div>
         <div className="card">
           <h3>Sales Today</h3>
-          <p>$1,230</p>
+          {error ? <p>Error: {error}</p> : <p>${totalSales}</p>}
         </div>
         <div className="card">
           <h3>Orders Pending</h3>
-          <p>45</p>
+          {error ? <p>Error: {error}</p> : <p>{pendingOrders}</p>}
         </div>
         <div className="card">
           <h3>New Reviews</h3>
-          <p>12</p>
+          <p>12</p> {/* Placeholder for new reviews */}
         </div>
       </section>
     </div>
