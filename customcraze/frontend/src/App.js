@@ -2,7 +2,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
-import Dashboard from "./components/Dashboard";
+import Dashboard from "./components/Customer/Dashboard";
 import PrivateRoute from "./components/PrivateRoute"; // Your custom PrivateRoute component
 import Signup from "./components/Signup";
 import ErrorBoundary from "./components/ErrorBoundary";

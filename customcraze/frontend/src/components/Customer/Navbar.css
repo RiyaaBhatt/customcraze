@@ -1,0 +1,34 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: rgba(8, 12, 24, 0.9); /* Transparent dark background */
+    backdrop-filter: blur(8px); /* Glassmorphism effect */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-logo {
+    font-size: 2rem;
+    font-weight: bold;
+    color: rgb(85, 212, 193);
+}
+
+.navbar-links {
+    display: flex;
+    gap: 20px;
+}
+
+.navbar-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+.navbar-links a:hover {
+    color: rgb(62, 175, 158); /* Hover effect color change */
+}

@@ -3,8 +3,6 @@ import { LOGIN_SUCCESS, LOGIN_FAIL, SIGNUP_SUCCESS, SIGNUP_FAIL, LOGOUT } from '
 
 // Set up the base URL for API requests
 const API_BASE_URL = 'http://localhost:8000/api'; // Update with your Django backend URL
-// src/redux/actions/authActions.js
-
 
 export const login = (username, password) => async dispatch => {
   try {
@@ -13,6 +11,10 @@ export const login = (username, password) => async dispatch => {
         'Content-Type': 'application/json'
       }
     });
+
+    // Save token to localStorage
+    localStorage.setItem('authToken', response.data.token);
+
     dispatch({
       type: LOGIN_SUCCESS,
       payload: response.data

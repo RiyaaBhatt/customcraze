@@ -1,0 +1,46 @@
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* background-image: url('img1.webp'); */
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    color: #ffffff;    
+}
+
+.hero-content {
+    max-width: 600px;
+    margin-top: 0px;
+
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-weight: bolder;
+}
+
+.hero-subtitle {
+    font-size: 1rem;
+    margin-bottom: 30px;
+}
+
+.hero-button {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    background: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+    border: 1px solid rgba(255, 255, 255, 0.5); /* Border to enhance glass effect */
+    border-radius: 15px;
+    color: #ffffff;
+    cursor: pointer;
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-button:hover {
+    background-color: rgba(85, 212, 193, 0.3); /* Light color change on hover */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+}
