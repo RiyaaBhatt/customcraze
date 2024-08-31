@@ -1,0 +1,37 @@
+/* Sidebar styles */
+.border-end {
+    border-right: 1px solid #ddd;
+    height: 100vh; /* Full height */
+  }
+  
+  /* Icon button styles */
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Design area styles */
+  .design-area {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    min-height: 80vh;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }/* Sidebar styles */
+.border-end {
+    border-right: 1px solid #ddd;
+    height: 100vh; /* Full height */
+  }
+  
+  /* Canvas styles */
+  canvas {
+    border: 1px solid #ccc;
+    background-color: #fff;
+  }
+  
+  

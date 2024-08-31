@@ -14,8 +14,9 @@ import Products from './components/Admin/ProductC'
 import Reports from './components/admin/Reports'
 import DashboardC from "./components/Admin/DashboardC";
 import CustomizationTemplates from "./components/Admin/CustomizationTemplates";
-
+import Design from './components/Customer/Design'
 import Orders from "./components/Admin/Orders";
+import DesignPage from "./components/Customer/DesignPage";
 const App = () => {
   return (
     <Router>
@@ -32,7 +33,7 @@ const App = () => {
               </PrivateRoute>
             }
           />
-
+<Route path="/design" element={<DesignPage />} />
           <Route
             path="/admindashboard"
             element={

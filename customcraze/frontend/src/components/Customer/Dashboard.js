@@ -4,6 +4,7 @@ import Hero from './Hero';
 import Navbar from './Navbar';  // Importing Navbar component
 import Footer from './Footer';  // Importing Footer component
 import './Customer.css';
+import ProductCard from './ProductCard';
 
 
 const Dashboard = () => {
@@ -25,7 +26,7 @@ const Dashboard = () => {
                     <p>Bring your ideas to life with customizable designs and easy tools.</p>
                 </div>
             </div>
-
+<ProductCard/>
             <Footer />  {/* Adding Footer at the bottom */}
         </div>
     );
