@@ -8,7 +8,8 @@ const DesignPage = () => {
 
   return (
     <div>
-      <Desgin selectedItem={selectedItem} />
+      <center>
+      <Desgin selectedItem={selectedItem} /></center>
     </div>
   );
 };
